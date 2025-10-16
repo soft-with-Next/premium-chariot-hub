@@ -14,6 +14,11 @@ import {
   Headphones,
 } from "lucide-react";
 
+import airportTransfer from "@/assets/airport-transfer.jpg";
+import cityToCity from "@/assets/city-to-city.jpg";
+import hourlyService from "@/assets/hourly-service.jpg";
+import corporateClient from "@/assets/corporate-client.jpg";
+
 const Home = () => {
   const services = [
     {
@@ -25,6 +30,7 @@ const Home = () => {
         "Meet & greet service",
         "Complimentary wait time",
       ],
+      image: airportTransfer,
       link: "/services",
     },
     {
@@ -36,6 +42,7 @@ const Home = () => {
         "Professional drivers",
         "Flexible scheduling",
       ],
+      image: cityToCity,
       link: "/services",
     },
     {
@@ -47,6 +54,7 @@ const Home = () => {
         "Flexible itinerary",
         "Premium vehicles",
       ],
+      image: hourlyService,
       link: "/services",
     },
     {
@@ -58,6 +66,7 @@ const Home = () => {
         "Admin dashboard",
         "Detailed reporting",
       ],
+      image: corporateClient,
       link: "/business",
     },
   ];
@@ -213,7 +222,7 @@ const Home = () => {
             {steps.map((step, index) => (
               <div key={index} className="relative">
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-accent/20 mb-4">{step.number}</div>
+                <div className="text-7xl font-bold text-accent/40 mb-4">{step.number}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
                 </div>

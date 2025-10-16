@@ -1,6 +1,9 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Search, Calendar, CreditCard, Navigation, Star } from "lucide-react";
 import bookingApp from "@/assets/booking-app.jpg";
+import teamPhoto from "@/assets/team-photo.jpg";
+import corporateClient from "@/assets/corporate-client.jpg";
+import customerService from "@/assets/customer-service.jpg";
 
 const HowItWorks = () => {
   const steps = [
@@ -63,6 +66,7 @@ const HowItWorks = () => {
   const hero = useScrollReveal();
   const section1 = useScrollReveal();
   const section2 = useScrollReveal();
+  const featureImages = [teamPhoto, corporateClient, bookingApp, customerService];
 
   return (
     <div className="min-h-screen">
@@ -125,6 +129,9 @@ const HowItWorks = () => {
             <div className="grid md:grid-cols-2 gap-6">
               {["Guest Booking", "Account Benefits", "Modification & Cancellation", "Customer Support"].map((title, index) => (
                 <div key={index} className={`card ${section2.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
+                  <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+                    <img src={featureImages[index]} alt={title} className="w-full h-full object-cover" />
+                  </div>
                   <h3 className="text-xl font-semibold mb-3">{title}</h3>
                   <p className="text-muted-foreground">Professional service tailored to your needs with flexible options and 24/7 support.</p>
                 </div>

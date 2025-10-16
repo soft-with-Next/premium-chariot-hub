@@ -1,7 +1,11 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Shield, Award, Users, Globe } from "lucide-react";
+import { Shield, Award, Users, Globe, MapPin } from "lucide-react";
 import teamPhoto from "@/assets/team-photo.jpg";
 import officeReception from "@/assets/office-reception.jpg";
+import professionalDriver from "@/assets/professional-driver.jpg";
+import fleetManagement from "@/assets/fleet-management.jpg";
+import customerService from "@/assets/customer-service.jpg";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const About = () => {
   const values = [
@@ -91,7 +95,7 @@ const About = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className={`text-center ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-5xl font-bold gradient-text mb-2">{stat.number}</div>
+                <AnimatedCounter value={stat.number} start={section2.isVisible} className="text-5xl font-bold gradient-text mb-2" />
                 <div className="text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -131,19 +135,22 @@ const About = () => {
               <p className="text-lg text-muted-foreground">Our commitment to your safety and comfort</p>
             </div>
             <div className="space-y-6">
-              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>
+              <div className={`card overflow-hidden ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>
+                <img src={professionalDriver} alt="Professional chauffeur" className="w-full h-40 object-cover rounded-lg mb-4" />
                 <h3 className="text-xl font-semibold mb-3">Driver Excellence</h3>
                 <p className="text-muted-foreground">
                   Every chauffeur undergoes extensive background checks, professional training, and ongoing performance reviews. They possess deep local knowledge, defensive driving certifications, and customer service expertise.
                 </p>
               </div>
-              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
+              <div className={`card overflow-hidden ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
+                <img src={fleetManagement} alt="Fleet maintenance" className="w-full h-40 object-cover rounded-lg mb-4" />
                 <h3 className="text-xl font-semibold mb-3">Fleet Maintenance</h3>
                 <p className="text-muted-foreground">
                   Our vehicles are inspected before every journey and serviced according to manufacturer schedules. We replace vehicles regularly to ensure you always ride in modern, immaculate transportation.
                 </p>
               </div>
-              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "300ms" }}>
+              <div className={`card overflow-hidden ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "300ms" }}>
+                <img src={customerService} alt="24/7 customer support" className="w-full h-40 object-cover rounded-lg mb-4" />
                 <h3 className="text-xl font-semibold mb-3">24/7 Operations</h3>
                 <p className="text-muted-foreground">
                   Our support team monitors every ride in real-time, ready to assist with any request or adjustment. Whether it's 3 AM or 3 PM, you have direct access to professional support.
@@ -162,9 +169,15 @@ const About = () => {
             We operate in major cities across North America, Europe, and Asia, with partnerships in additional regions. Wherever your business takes you, LuxeRide provides the same premium experience you trust.
           </p>
           <div className="inline-block bg-muted/50 rounded-xl p-8">
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <div className="bg-gradient-to-br from-accent to-accent/80 p-3 rounded-lg">
+                <Globe className="h-6 w-6 text-accent-foreground" />
+              </div>
+              <span className="text-sm text-muted-foreground">Worldwide cities and partners</span>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div>
-                <h4 className="font-semibold mb-2">North America</h4>
+                <h4 className="font-semibold mb-2 flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> North America</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>New York</li>
                   <li>Los Angeles</li>
@@ -173,7 +186,7 @@ const About = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">Europe</h4>
+                <h4 className="font-semibold mb-2 flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> Europe</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>London</li>
                   <li>Paris</li>
@@ -182,7 +195,7 @@ const About = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">Asia Pacific</h4>
+                <h4 className="font-semibold mb-2 flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> Asia Pacific</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>Singapore</li>
                   <li>Hong Kong</li>
@@ -191,7 +204,7 @@ const About = () => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">Middle East</h4>
+                <h4 className="font-semibold mb-2 flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> Middle East</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>Dubai</li>
                   <li>Abu Dhabi</li>

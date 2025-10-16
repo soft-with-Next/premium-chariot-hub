@@ -93,6 +93,7 @@ const Contact = () => {
               </form>
             </div>
             <div className="space-y-6">
+              <img src={customerService} alt="Customer support" className="rounded-xl shadow-premium mb-2 w-full h-auto" />
               <h2 className="heading-md mb-6">Get in Touch</h2>
               <p className="text-muted-foreground">Whether you're planning a single journey or need comprehensive corporate transportation solutions, our team is ready to assist.</p>
               <div className="card">

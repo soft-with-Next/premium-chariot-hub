@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, MapPin, Clock, Car } from "lucide-react";
+import bookingApp from "@/assets/booking-app.jpg";
+import airportTransfer from "@/assets/airport-transfer.jpg";
+import luxuryInterior from "@/assets/luxury-interior.jpg";
+import fleetManagement from "@/assets/fleet-management.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,9 +29,9 @@ const Booking = () => {
   });
 
   const vehicleOptions = [
-    { value: "sedan", label: "Executive Sedan - $85/hr", passengers: 3 },
-    { value: "suv", label: "Luxury SUV - $120/hr", passengers: 6 },
-    { value: "van", label: "Premium Van - $150/hr", passengers: 8 },
+    { value: "sedan", label: "Executive Sedan - $85/hr", passengers: 3, image: luxuryInterior },
+    { value: "suv", label: "Luxury SUV - $120/hr", passengers: 6, image: airportTransfer },
+    { value: "van", label: "Premium Van - $150/hr", passengers: 8, image: fleetManagement },
   ];
 
   const handleContinue = () => {
@@ -48,8 +52,16 @@ const Booking = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       {/* Header */}
-      <section className="bg-gradient-to-r from-primary to-primary-glow py-16">
-        <div className="container-custom text-center">
+      <section className="relative min-h-[55vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={bookingApp}
+            alt="Booking app interface"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
+        </div>
+        <div className="container-custom relative z-10 py-16 text-center">
           <h1 className="heading-lg text-primary-foreground mb-4">Book Your Ride</h1>
           <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
             Complete your booking in three simple steps
@@ -196,7 +208,7 @@ const Booking = () => {
                     {vehicleOptions.map((vehicle) => (
                       <div
                         key={vehicle.value}
-                        className={`card cursor-pointer transition-all ${
+                        className={`card cursor-pointer transition-all group ${
                           bookingData.vehicle === vehicle.value
                             ? "ring-2 ring-accent"
                             : ""
@@ -205,13 +217,16 @@ const Booking = () => {
                           setBookingData({ ...bookingData, vehicle: vehicle.value })
                         }
                       >
-                        <div className="aspect-video bg-muted rounded-lg mb-3" />
+                        <img src={vehicle.image} alt={vehicle.label} className="aspect-video w-full object-cover rounded-lg mb-3 group-hover:scale-[1.02] transition-transform" />
                         <h3 className="font-semibold text-sm mb-1">
                           {vehicle.label.split(" - ")[0]}
                         </h3>
                         <p className="text-xs text-muted-foreground">
                           Up to {vehicle.passengers} passengers
                         </p>
+                        {bookingData.vehicle === vehicle.value && (
+                          <span className="mt-2 inline-block text-[11px] px-2 py-1 rounded bg-accent/10 text-accent">Selected</span>
+                        )}
                       </div>
                     ))}
                   </div>

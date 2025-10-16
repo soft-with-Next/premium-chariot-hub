@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Car } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +23,11 @@ const Navigation = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <div className="bg-gradient-to-r from-primary to-primary-glow p-2 rounded-lg group-hover:shadow-lg transition-shadow">
-              <Car className="h-6 w-6 text-primary-foreground" />
+              <img src={logo} alt="LuxeRide" className="h-6 w-6" />
             </div>
-            <span className="text-xl font-bold">LuxeRide</span>
+            <span className="text-xl font-bold tracking-wide">LuxeRide</span>
           </Link>
 
           {/* Desktop Navigation */}

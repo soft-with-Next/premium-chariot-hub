@@ -3,6 +3,10 @@ import { Building2, TrendingUp, Users, FileText, Shield, Headphones } from "luci
 import { Link } from "react-router-dom";
 import businessMeeting from "@/assets/business-meeting.jpg";
 import corporateClient from "@/assets/corporate-client.jpg";
+import luxuryInterior from "@/assets/luxury-interior.jpg";
+import teamPhoto from "@/assets/team-photo.jpg";
+import professionalDriver from "@/assets/professional-driver.jpg";
+import fleetManagement from "@/assets/fleet-management.jpg";
 
 const Business = () => {
   const benefits = [
@@ -158,7 +162,7 @@ const Business = () => {
             {steps.map((step, index) => (
               <div key={index} className={`relative ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`} style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-accent/20 mb-4">{step.number}</div>
+                  <div className="text-6xl font-extrabold text-accent/20 mb-4">{step.number}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
                 </div>
@@ -208,6 +212,9 @@ const Business = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>
+                <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+                  <img src={luxuryInterior} alt="Executive Travel" className="w-full h-full object-cover" />
+                </div>
                 <h3 className="text-xl font-semibold mb-3">Executive Travel</h3>
                 <p className="text-muted-foreground mb-3">
                   Ensure your leadership team travels in comfort and arrives on time for critical meetings, presentations, and events.
@@ -219,6 +226,9 @@ const Business = () => {
                 </ul>
               </div>
               <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
+                <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+                  <img src={teamPhoto} alt="Client Entertainment" className="w-full h-full object-cover" />
+                </div>
                 <h3 className="text-xl font-semibold mb-3">Client Entertainment</h3>
                 <p className="text-muted-foreground mb-3">
                   Make a lasting impression by providing premium transportation for visiting clients and prospects.
@@ -230,6 +240,9 @@ const Business = () => {
                 </ul>
               </div>
               <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "300ms" }}>
+                <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+                  <img src={professionalDriver} alt="Employee Commutes" className="w-full h-full object-cover" />
+                </div>
                 <h3 className="text-xl font-semibold mb-3">Employee Commutes</h3>
                 <p className="text-muted-foreground mb-3">
                   Provide safe, reliable transportation for late-night work or employees without personal vehicles.
@@ -241,6 +254,9 @@ const Business = () => {
                 </ul>
               </div>
               <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "400ms" }}>
+                <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+                  <img src={fleetManagement} alt="Event Transportation" className="w-full h-full object-cover" />
+                </div>
                 <h3 className="text-xl font-semibold mb-3">Event Transportation</h3>
                 <p className="text-muted-foreground mb-3">
                   Coordinate group transportation for conferences, team offsites, and corporate events.

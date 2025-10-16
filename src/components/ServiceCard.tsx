@@ -7,14 +7,20 @@ interface ServiceCardProps {
   title: string;
   description: string;
   features: string[];
+  image?: string;
+  imageAlt?: string;
   link?: string;
 }
-
-const ServiceCard = ({ icon: Icon, title, description, features, link }: ServiceCardProps) => {
+const ServiceCard = ({ icon: Icon, title, description, features, image, imageAlt, link }: ServiceCardProps) => {
   return (
     <div className="card group">
-      <div className="bg-gradient-to-br from-primary to-primary-glow p-4 rounded-lg w-fit mb-4 group-hover:shadow-lg transition-shadow">
-        <Icon className="h-8 w-8 text-primary-foreground" />
+      {image && (
+        <div className="aspect-video bg-muted rounded-lg mb-4 overflow-hidden">
+          <img src={image} alt={imageAlt ?? title} className="w-full h-full object-cover" />
+        </div>
+      )}
+      <div className="bg-gradient-to-br from-accent to-accent/80 p-4 rounded-lg w-fit mb-4 group-hover:shadow-lg transition-shadow">
+        <Icon className="h-8 w-8 text-accent-foreground" />
       </div>
       <h3 className="heading-sm mb-3">{title}</h3>
       <p className="text-muted-foreground mb-4">{description}</p>
