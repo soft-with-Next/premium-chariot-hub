@@ -130,7 +130,7 @@ const Business = () => {
       <section className="home-section" ref={section1.ref}>
         <div className="container-custom">
           <div className={`text-center mb-16 ${section1.isVisible ? "animate-fade-up" : "opacity-0"}`}>
-            <h2 className="heading-lg mb-4">Why Businesses Choose LuxeRide</h2>
+            <h2 className="heading-lg mb-4">Why Businesses Choose Blinx Ride</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Comprehensive solutions designed to simplify corporate travel management.
             </p>
@@ -208,7 +208,7 @@ const Business = () => {
           <div className="max-w-4xl mx-auto">
             <div className={`text-center mb-12 ${section4.isVisible ? "animate-fade-up" : "opacity-0"}`}>
               <h2 className="heading-md mb-4">Common Use Cases</h2>
-              <p className="text-lg text-muted-foreground">See how companies use LuxeRide to enhance their operations</p>
+              <p className="text-lg text-muted-foreground">See how companies use Blinx Ride to enhance their operations</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>

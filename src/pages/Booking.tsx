@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar, MapPin, Clock, Car } from "lucide-react";
+import { Calendar, MapPin, Clock, Car, Plane } from "lucide-react";
 import bookingApp from "@/assets/booking-app.jpg";
 import airportTransfer from "@/assets/airport-transfer.jpg";
 import luxuryInterior from "@/assets/luxury-interior.jpg";
 import fleetManagement from "@/assets/fleet-management.jpg";
+import { services } from "@/lib/services";
 import usCities from "@/lib/usCities";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,8 +22,12 @@ const Booking = () => {
   const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [bookingData, setBookingData] = useState({
+    serviceType: "City-to-City Travel",
     pickup: "",
     dropoff: "",
+    airportPickup: "",
+    airportDropoff: "",
+    serviceDetails: "",
     date: "",
     time: "",
     vehicle: "",
@@ -59,19 +64,33 @@ const Booking = () => {
     if (step > 1) setStep(step - 1);
   };
   const handlePickupSelect = (value: string) => {
-    setBookingData((prev) => ({
-      ...prev,
-      pickup: value,
-      dropoff: prev.dropoff === value ? "" : prev.dropoff,
-    }));
+    if (bookingData.serviceType === "City-to-City Travel") {
+      setBookingData((prev) => ({
+        ...prev,
+        pickup: value,
+        dropoff: prev.dropoff === value ? "" : prev.dropoff,
+      }));
+    }
   };
   const handleDropoffSelect = (value: string) => {
-    setBookingData((prev) => ({
-      ...prev,
-      dropoff: value,
-      pickup: prev.pickup === value ? "" : prev.pickup,
-    }));
+    if (bookingData.serviceType === "City-to-City Travel") {
+      setBookingData((prev) => ({
+        ...prev,
+        dropoff: value,
+        pickup: prev.pickup === value ? "" : prev.pickup,
+      }));
+    }
   };
+
+  // Clear irrelevant fields when service type changes
+  useEffect(() => {
+    if (bookingData.serviceType !== "City-to-City Travel") {
+      setBookingData((prev) => ({ ...prev, pickup: "", dropoff: "" }));
+    }
+    if (bookingData.serviceType !== "Airport Transfers") {
+      setBookingData((prev) => ({ ...prev, airportPickup: "", airportDropoff: "" }));
+    }
+  }, [bookingData.serviceType]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
@@ -134,42 +153,127 @@ const Booking = () => {
                   <h2 className="heading-sm mb-6">Where and When?</h2>
 
                   <div>
-                    <Label htmlFor="pickup" className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-accent" />
-                      Pickup Location
+                    <Label htmlFor="serviceType" className="flex items-center gap-2">
+                      <Car className="h-4 w-4 text-accent" />
+                      Service Type
                     </Label>
-                    <Select value={bookingData.pickup} onValueChange={handlePickupSelect}>
-                      <SelectTrigger id="pickup" className="mt-1.5">
-                        <SelectValue placeholder="Select pickup city" />
+                    <Select
+                      value={bookingData.serviceType}
+                      onValueChange={(value) =>
+                        setBookingData({ ...bookingData, serviceType: value })
+                      }
+                    >
+                      <SelectTrigger id="serviceType" className="mt-1.5">
+                        <SelectValue placeholder="Select a service type" />
                       </SelectTrigger>
                       <SelectContent>
-                        {availablePickupCities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
+                        {services.map((service) => (
+                          <SelectItem key={service.title} value={service.title}>
+                            {service.title}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
 
-                  <div>
-                    <Label htmlFor="dropoff" className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-accent" />
-                      Drop-off Location
-                    </Label>
-                    <Select value={bookingData.dropoff} onValueChange={handleDropoffSelect}>
-                      <SelectTrigger id="dropoff" className="mt-1.5">
-                        <SelectValue placeholder="Select drop-off city" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availableDropoffCities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  {bookingData.serviceType === "City-to-City Travel" && (
+                    <>
+                      <div>
+                        <Label htmlFor="pickup" className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-accent" />
+                          Pickup Location
+                        </Label>
+                        <Select value={bookingData.pickup} onValueChange={handlePickupSelect}>
+                          <SelectTrigger id="pickup" className="mt-1.5">
+                            <SelectValue placeholder="Select pickup city" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {availablePickupCities.map((city) => (
+                              <SelectItem key={city} value={city}>
+                                {city}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="dropoff" className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-accent" />
+                          Drop-off Location
+                        </Label>
+                        <Select value={bookingData.dropoff} onValueChange={handleDropoffSelect}>
+                          <SelectTrigger id="dropoff" className="mt-1.5">
+                            <SelectValue placeholder="Select drop-off city" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {availableDropoffCities.map((city) => (
+                              <SelectItem key={city} value={city}>
+                                {city}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </>
+                  )}
+
+                  {bookingData.serviceType === "Airport Transfers" && (
+                    <>
+                      <div>
+                        <Label htmlFor="airportPickup" className="flex items-center gap-2">
+                          <Plane className="h-4 w-4 text-accent" />
+                          Airport Pickup
+                        </Label>
+                        <Input
+                          id="airportPickup"
+                          type="text"
+                          className="mt-1.5"
+                          placeholder="e.g., LAX Terminal 3, Flight UA123"
+                          value={bookingData.airportPickup}
+                          onChange={(e) =>
+                            setBookingData({ ...bookingData, airportPickup: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="airportDropoff" className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-accent" />
+                          Destination Address
+                        </Label>
+                        <Input
+                          id="airportDropoff"
+                          type="text"
+                          className="mt-1.5"
+                          placeholder="e.g., 123 Main St, Anytown, USA"
+                          value={bookingData.airportDropoff}
+                          onChange={(e) =>
+                            setBookingData({ ...bookingData, airportDropoff: e.target.value })
+                          }
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {bookingData.serviceType !== "City-to-City Travel" &&
+                    bookingData.serviceType !== "Airport Transfers" && (
+                      <div>
+                        <Label htmlFor="otherServiceDetails" className="flex items-center gap-2">
+                          <Car className="h-4 w-4 text-accent" />
+                          Service Details
+                        </Label>
+                        <Input
+                          id="otherServiceDetails"
+                          type="text"
+                          className="mt-1.5"
+                          placeholder="e.g., Event name, hourly duration, specific requirements"
+                          value={bookingData.serviceDetails}
+                          onChange={(e) =>
+                            setBookingData({ ...bookingData, serviceDetails: e.target.value })
+                          }
+                        />
+                      </div>
+                    )}
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>

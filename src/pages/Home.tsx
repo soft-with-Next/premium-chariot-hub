@@ -152,7 +152,7 @@ const Home = () => {
       rating: 5,
     },
     {
-      quote: "I use LuxeRide for all my airport transfers. Never disappointed - always on time and stress-free.",
+      quote: "I use Blinx Ride for all my airport transfers. Never disappointed - always on time and stress-free.",
       author: "Sarah Williams",
       role: "Frequent Traveler",
       rating: 5,
@@ -173,7 +173,7 @@ const Home = () => {
       <section className="home-section bg-background">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="heading-lg mb-4">Why Choose LuxeRide</h2>
+            <h2 className="heading-lg mb-4">Why Choose Blinx Ride</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Premium chauffeur services designed for discerning travelers who value reliability and comfort.
             </p>

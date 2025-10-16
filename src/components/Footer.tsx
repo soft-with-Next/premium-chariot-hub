@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Car, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import logo from "@/assets/blinx-logo.png";
 
 const Footer = () => {
   return (
@@ -10,9 +11,9 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-accent p-2 rounded-lg">
-                <Car className="h-6 w-6 text-accent-foreground" />
+                <img src={logo} alt="Blinx Ride" className="h-6 w-6" />
               </div>
-              <span className="text-xl font-bold">LuxeRide</span>
+              <span className="text-xl font-bold">Blinx Ride</span>
             </div>
             <p className="text-primary-foreground/80 mb-4">
               Premium chauffeur services for discerning travelers. Reliable, comfortable, and discreet.
@@ -111,7 +112,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-primary-foreground/60">
-          <p>&copy; {new Date().getFullYear()} LuxeRide. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Blinx Ride. All rights reserved.</p>
         </div>
       </div>
     </footer>
