@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/BLiNX-logo.png";
+import logo from "@/assets/blinx-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);

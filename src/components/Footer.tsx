@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import logo from "@/assets/BLiNX-logo.png";
+import logo from "@/assets/blinx-logo.png";
 
 const Footer = () => {
   return (
