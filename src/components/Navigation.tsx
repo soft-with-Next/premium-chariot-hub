@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/blinx-logo.png";
+import logo from "@/assets/BLiNX-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +25,9 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="bg-gradient-to-r from-primary to-primary-glow p-2 rounded-lg group-hover:shadow-lg transition-shadow">
-              <img src={logo} alt="Blinx Ride" className="h-6 w-6" />
+              <img src={logo} alt="BLiNX Ride" className="h-6 w-6" />
             </div>
-            <span className="text-xl font-bold tracking-wide">Blinx Ride</span>
+            <span className="text-xl font-bold tracking-wide">BLiNX Ride</span>
           </Link>
 
           {/* Desktop Navigation */}

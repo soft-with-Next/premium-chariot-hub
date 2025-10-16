@@ -55,7 +55,7 @@ const About = () => {
         <div className="container-custom relative z-10 py-20">
           <div className="max-w-3xl" ref={hero.ref}>
             <div className={`${hero.isVisible ? "animate-fade-up" : "opacity-0"}`}>
-              <h1 className="heading-xl text-primary-foreground mb-6">About Blinx Ride</h1>
+              <h1 className="heading-xl text-primary-foreground mb-6">About BLiNX Ride</h1>
               <p className="text-xl text-primary-foreground/90 leading-relaxed">
                 Premium chauffeur services built on trust, professionalism, and an unwavering commitment to excellence.
               </p>
@@ -72,13 +72,13 @@ const About = () => {
               <h2 className="heading-md mb-6">Our Story</h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
-                  Founded in 2009, Blinx Ride began with a simple mission: to provide the most reliable, comfortable, and discreet chauffeur service for discerning travelers. What started as a small fleet serving a single city has grown into a trusted name in premium transportation across major metropolitan areas.
+                  Founded in 2009, BLiNX Ride began with a simple mission: to provide the most reliable, comfortable, and discreet chauffeur service for discerning travelers. What started as a small fleet serving a single city has grown into a trusted name in premium transportation across major metropolitan areas.
                 </p>
                 <p>
                   We recognized that busy executives, VIP travelers, and corporate clients needed more than just a ride—they needed a seamless, stress-free experience. Every detail, from vehicle selection to driver training, was designed with that goal in mind.
                 </p>
                 <p>
-                  Today, Blinx Ride serves thousands of clients annually, maintaining the same commitment to excellence that defined our first day in business. Our reputation is built on punctuality, professionalism, and the trust our clients place in us for their most important journeys.
+                  Today, BLiNX Ride serves thousands of clients annually, maintaining the same commitment to excellence that defined our first day in business. Our reputation is built on punctuality, professionalism, and the trust our clients place in us for their most important journeys.
                 </p>
               </div>
             </div>
@@ -166,7 +166,7 @@ const About = () => {
         <div className="container-custom text-center">
           <h2 className="heading-md mb-6">Global Coverage</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            We operate in major cities across North America, Europe, and Asia, with partnerships in additional regions. Wherever your business takes you, Blinx Ride provides the same premium experience you trust.
+            We operate in major cities across North America, Europe, and Asia, with partnerships in additional regions. Wherever your business takes you, BLiNX Ride provides the same premium experience you trust.
           </p>
           <div className="inline-block bg-muted/50 rounded-xl p-8">
             <div className="flex items-center justify-center gap-2 mb-6">
