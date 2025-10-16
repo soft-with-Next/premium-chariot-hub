@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, MapPin, Clock, Car } from "lucide-react";
 import bookingApp from "@/assets/booking-app.jpg";
 import airportTransfer from "@/assets/airport-transfer.jpg";
 import luxuryInterior from "@/assets/luxury-interior.jpg";
 import fleetManagement from "@/assets/fleet-management.jpg";
+import usCities from "@/lib/usCities";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +28,15 @@ const Booking = () => {
     vehicle: "",
     passengers: "1",
   });
+  const collator = useMemo(() => new Intl.Collator("en", { sensitivity: "base" }), []);
+  const availablePickupCities = useMemo(
+    () => usCities.filter((c) => c !== bookingData.dropoff).sort(collator.compare),
+    [bookingData.dropoff, collator]
+  );
+  const availableDropoffCities = useMemo(
+    () => usCities.filter((c) => c !== bookingData.pickup).sort(collator.compare),
+    [bookingData.pickup, collator]
+  );
 
   const vehicleOptions = [
     { value: "sedan", label: "Executive Sedan - $85/hr", passengers: 3, image: luxuryInterior },
@@ -47,6 +57,20 @@ const Booking = () => {
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
+  };
+  const handlePickupSelect = (value: string) => {
+    setBookingData((prev) => ({
+      ...prev,
+      pickup: value,
+      dropoff: prev.dropoff === value ? "" : prev.dropoff,
+    }));
+  };
+  const handleDropoffSelect = (value: string) => {
+    setBookingData((prev) => ({
+      ...prev,
+      dropoff: value,
+      pickup: prev.pickup === value ? "" : prev.pickup,
+    }));
   };
 
   return (
@@ -108,21 +132,24 @@ const Booking = () => {
               {step === 1 && (
                 <div className="space-y-6">
                   <h2 className="heading-sm mb-6">Where and When?</h2>
-                  
+
                   <div>
                     <Label htmlFor="pickup" className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-accent" />
                       Pickup Location
                     </Label>
-                    <Input
-                      id="pickup"
-                      placeholder="Enter pickup address"
-                      className="mt-1.5"
-                      value={bookingData.pickup}
-                      onChange={(e) =>
-                        setBookingData({ ...bookingData, pickup: e.target.value })
-                      }
-                    />
+                    <Select value={bookingData.pickup} onValueChange={handlePickupSelect}>
+                      <SelectTrigger id="pickup" className="mt-1.5">
+                        <SelectValue placeholder="Select pickup city" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {availablePickupCities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
@@ -130,15 +157,18 @@ const Booking = () => {
                       <MapPin className="h-4 w-4 text-accent" />
                       Drop-off Location
                     </Label>
-                    <Input
-                      id="dropoff"
-                      placeholder="Enter destination address"
-                      className="mt-1.5"
-                      value={bookingData.dropoff}
-                      onChange={(e) =>
-                        setBookingData({ ...bookingData, dropoff: e.target.value })
-                      }
-                    />
+                    <Select value={bookingData.dropoff} onValueChange={handleDropoffSelect}>
+                      <SelectTrigger id="dropoff" className="mt-1.5">
+                        <SelectValue placeholder="Select drop-off city" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {availableDropoffCities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
