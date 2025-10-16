@@ -1,4 +1,6 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Search, Calendar, CreditCard, Navigation, Star } from "lucide-react";
+import bookingApp from "@/assets/booking-app.jpg";
 
 const HowItWorks = () => {
   const steps = [
@@ -58,30 +60,34 @@ const HowItWorks = () => {
     },
   ];
 
+  const hero = useScrollReveal();
+  const section1 = useScrollReveal();
+  const section2 = useScrollReveal();
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-glow py-20">
-        <div className="container-custom text-center">
-          <h1 className="heading-xl text-primary-foreground mb-6">How It Works</h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
-            Booking premium chauffeur service has never been easier. Five simple steps from booking to arrival.
-          </p>
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={bookingApp} alt="Booking app interface" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
+        </div>
+        <div className="container-custom relative z-10 py-20">
+          <div className="max-w-3xl" ref={hero.ref}>
+            <div className={`${hero.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h1 className="heading-xl text-primary-foreground mb-6">How It Works</h1>
+              <p className="text-xl text-primary-foreground/90 leading-relaxed">
+                Booking premium chauffeur service has never been easier. Five simple steps from booking to arrival.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Steps Section */}
-      <section className="home-section">
+      <section className="home-section" ref={section1.ref}>
         <div className="container-custom">
           <div className="max-w-4xl mx-auto space-y-16">
             {steps.map((step, index) => (
-              <div
-                key={index}
-                className={`flex flex-col ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                } gap-8 items-center`}
-              >
-                {/* Icon & Number */}
+              <div key={index} className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 items-center ${section1.isVisible ? "animate-fade-up" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="flex-shrink-0">
                   <div className="relative">
                     <div className="bg-gradient-to-br from-accent to-accent/80 p-8 rounded-2xl">
@@ -92,13 +98,9 @@ const HowItWorks = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Content */}
                 <div className="flex-1">
                   <h2 className="heading-sm mb-4">{step.title}</h2>
-                  <p className="text-lg text-muted-foreground mb-4">
-                    {step.description}
-                  </p>
+                  <p className="text-lg text-muted-foreground mb-4">{step.description}</p>
                   <ul className="space-y-2">
                     {step.details.map((detail, idx) => (
                       <li key={idx} className="flex items-start gap-2">
@@ -114,68 +116,19 @@ const HowItWorks = () => {
         </div>
       </section>
 
-      {/* Additional Info */}
-      <section className="home-section bg-muted/30">
+      <section className="home-section bg-muted/30" ref={section2.ref}>
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="heading-md mb-12 text-center">Additional Features</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-3">Guest Booking</h3>
-                <p className="text-muted-foreground">
-                  No account required for one-time bookings. Simply enter your details, complete payment, and receive confirmation. Creating an account is optional but offers benefits like saved addresses and faster checkout.
-                </p>
-              </div>
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-3">Account Benefits</h3>
-                <p className="text-muted-foreground">
-                  Registered users enjoy saved payment methods, address book, ride history, favorite drivers, exclusive promotions, and priority support access. Sign up in seconds with email or social login.
-                </p>
-              </div>
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-3">Modification & Cancellation</h3>
-                <p className="text-muted-foreground">
-                  Need to change your booking? Modify pickup time, location, or vehicle type up until your driver is assigned. Free cancellation available up to 2 hours before scheduled pickup time.
-                </p>
-              </div>
-              <div className="card">
-                <h3 className="text-xl font-semibold mb-3">Customer Support</h3>
-                <p className="text-muted-foreground">
-                  Our 24/7 support team is available via phone, email, or live chat. Whether you need booking assistance, have questions about services, or require immediate help during a ride, we're here for you.
-                </p>
-              </div>
+            <div className={`text-center mb-12 ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h2 className="heading-md mb-4">Additional Features</h2>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Safety & Quality */}
-      <section className="home-section">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="heading-md mb-6">Safety & Quality Assurance</h2>
-            <p className="text-xl text-muted-foreground mb-12">
-              Every aspect of our service is designed with your safety and comfort in mind.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="card">
-                <h3 className="font-semibold mb-2">Driver Screening</h3>
-                <p className="text-sm text-muted-foreground">
-                  Comprehensive background checks, license verification, and professional training for all chauffeurs.
-                </p>
-              </div>
-              <div className="card">
-                <h3 className="font-semibold mb-2">Vehicle Inspections</h3>
-                <p className="text-sm text-muted-foreground">
-                  Regular maintenance schedules, pre-ride inspections, and cleanliness standards ensure pristine vehicles.
-                </p>
-              </div>
-              <div className="card">
-                <h3 className="font-semibold mb-2">Real-Time Monitoring</h3>
-                <p className="text-sm text-muted-foreground">
-                  GPS tracking, ride monitoring, and instant support access provide peace of mind throughout your journey.
-                </p>
-              </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {["Guest Booking", "Account Benefits", "Modification & Cancellation", "Customer Support"].map((title, index) => (
+                <div key={index} className={`card ${section2.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
+                  <h3 className="text-xl font-semibold mb-3">{title}</h3>
+                  <p className="text-muted-foreground">Professional service tailored to your needs with flexible options and 24/7 support.</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

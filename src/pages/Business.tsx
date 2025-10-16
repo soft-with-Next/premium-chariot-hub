@@ -1,5 +1,8 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Building2, TrendingUp, Users, FileText, Shield, Headphones } from "lucide-react";
 import { Link } from "react-router-dom";
+import businessMeeting from "@/assets/business-meeting.jpg";
+import corporateClient from "@/assets/corporate-client.jpg";
 
 const Business = () => {
   const benefits = [
@@ -88,29 +91,41 @@ const Business = () => {
     },
   ];
 
+  const hero = useScrollReveal();
+  const section1 = useScrollReveal();
+  const section2 = useScrollReveal();
+  const section3 = useScrollReveal();
+  const section4 = useScrollReveal();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-glow py-20">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="heading-xl text-primary-foreground mb-6">
-              Corporate Transportation Solutions
-            </h1>
-            <p className="text-xl text-primary-foreground/90 mb-8">
-              Streamline your business travel with dedicated corporate accounts, consolidated billing, and priority support. Trusted by leading companies worldwide.
-            </p>
-            <Link to="/contact" className="btn-hero inline-flex">
-              Open a Corporate Account
-            </Link>
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={businessMeeting} alt="Business meeting in luxury vehicle" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-transparent" />
+        </div>
+        <div className="container-custom relative z-10 py-20">
+          <div className="max-w-3xl" ref={hero.ref}>
+            <div className={`${hero.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h1 className="heading-xl text-primary-foreground mb-6">
+                Corporate Transportation Solutions
+              </h1>
+              <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed">
+                Streamline your business travel with dedicated corporate accounts, consolidated billing, and priority support. Trusted by leading companies worldwide.
+              </p>
+              <Link to="/contact" className="btn-hero inline-flex">
+                Open a Corporate Account
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="home-section">
+      <section className="home-section" ref={section1.ref}>
         <div className="container-custom">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 ${section1.isVisible ? "animate-fade-up" : "opacity-0"}`}>
             <h2 className="heading-lg mb-4">Why Businesses Choose LuxeRide</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Comprehensive solutions designed to simplify corporate travel management.
@@ -118,7 +133,7 @@ const Business = () => {
           </div>
           <div className="card-grid-3col">
             {benefits.map((benefit, index) => (
-              <div key={index} className="card">
+              <div key={index} className={`card ${section1.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="bg-gradient-to-br from-accent to-accent/80 p-3 rounded-lg w-fit mb-4">
                   <benefit.icon className="h-7 w-7 text-accent-foreground" />
                 </div>
@@ -131,9 +146,9 @@ const Business = () => {
       </section>
 
       {/* How It Works */}
-      <section className="home-section bg-muted/30">
+      <section className="home-section bg-muted/30" ref={section2.ref}>
         <div className="container-custom">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`}>
             <h2 className="heading-lg mb-4">Getting Started</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Open your corporate account in four simple steps.
@@ -141,7 +156,7 @@ const Business = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <div key={index} className="relative">
+              <div key={index} className={`relative ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`} style={{ animationDelay: `${index * 150}ms` }}>
                 <div className="text-center">
                   <div className="text-6xl font-bold text-accent/20 mb-4">{step.number}</div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -157,9 +172,9 @@ const Business = () => {
       </section>
 
       {/* Features Section */}
-      <section className="home-section">
+      <section className="home-section" ref={section3.ref}>
         <div className="container-custom">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 ${section3.isVisible ? "animate-fade-up" : "opacity-0"}`}>
             <h2 className="heading-lg mb-4">Platform Features</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Powerful tools to manage your corporate transportation program.
@@ -167,7 +182,7 @@ const Business = () => {
           </div>
           <div className="card-grid-3col">
             {features.map((feature, index) => (
-              <div key={index} className="card">
+              <div key={index} className={`card ${section3.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
                 <ul className="space-y-2">
                   {feature.items.map((item, idx) => (
@@ -184,12 +199,15 @@ const Business = () => {
       </section>
 
       {/* Use Cases */}
-      <section className="home-section bg-muted/30">
+      <section className="home-section bg-muted/30" ref={section4.ref}>
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="heading-md mb-12 text-center">Common Use Cases</h2>
+            <div className={`text-center mb-12 ${section4.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h2 className="heading-md mb-4">Common Use Cases</h2>
+              <p className="text-lg text-muted-foreground">See how companies use LuxeRide to enhance their operations</p>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Executive Travel</h3>
                 <p className="text-muted-foreground mb-3">
                   Ensure your leadership team travels in comfort and arrives on time for critical meetings, presentations, and events.
@@ -200,7 +218,7 @@ const Business = () => {
                   <li>• Flexible scheduling</li>
                 </ul>
               </div>
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Client Entertainment</h3>
                 <p className="text-muted-foreground mb-3">
                   Make a lasting impression by providing premium transportation for visiting clients and prospects.
@@ -211,7 +229,7 @@ const Business = () => {
                   <li>• Branded experience</li>
                 </ul>
               </div>
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "300ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Employee Commutes</h3>
                 <p className="text-muted-foreground mb-3">
                   Provide safe, reliable transportation for late-night work or employees without personal vehicles.
@@ -222,7 +240,7 @@ const Business = () => {
                   <li>• Budget controls</li>
                 </ul>
               </div>
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "400ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Event Transportation</h3>
                 <p className="text-muted-foreground mb-3">
                   Coordinate group transportation for conferences, team offsites, and corporate events.

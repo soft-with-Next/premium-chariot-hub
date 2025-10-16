@@ -1,4 +1,7 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Shield, Award, Users, Globe } from "lucide-react";
+import teamPhoto from "@/assets/team-photo.jpg";
+import officeReception from "@/assets/office-reception.jpg";
 
 const About = () => {
   const values = [
@@ -31,44 +34,63 @@ const About = () => {
     { number: "99.8%", label: "On-Time Record" },
   ];
 
+  const hero = useScrollReveal();
+  const section1 = useScrollReveal();
+  const section2 = useScrollReveal();
+  const section3 = useScrollReveal();
+  const section4 = useScrollReveal();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary-glow py-20">
-        <div className="container-custom text-center">
-          <h1 className="heading-xl text-primary-foreground mb-6">About LuxeRide</h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
-            Premium chauffeur services built on trust, professionalism, and an unwavering commitment to excellence.
-          </p>
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={officeReception} alt="Luxury office reception" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
         </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="home-section">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="heading-md mb-6">Our Story</h2>
-            <div className="space-y-4 text-lg text-muted-foreground">
-              <p>
-                Founded in 2009, LuxeRide began with a simple mission: to provide the most reliable, comfortable, and discreet chauffeur service for discerning travelers. What started as a small fleet serving a single city has grown into a trusted name in premium transportation across major metropolitan areas.
-              </p>
-              <p>
-                We recognized that busy executives, VIP travelers, and corporate clients needed more than just a ride—they needed a seamless, stress-free experience. Every detail, from vehicle selection to driver training, was designed with that goal in mind.
-              </p>
-              <p>
-                Today, LuxeRide serves thousands of clients annually, maintaining the same commitment to excellence that defined our first day in business. Our reputation is built on punctuality, professionalism, and the trust our clients place in us for their most important journeys.
+        <div className="container-custom relative z-10 py-20">
+          <div className="max-w-3xl" ref={hero.ref}>
+            <div className={`${hero.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h1 className="heading-xl text-primary-foreground mb-6">About LuxeRide</h1>
+              <p className="text-xl text-primary-foreground/90 leading-relaxed">
+                Premium chauffeur services built on trust, professionalism, and an unwavering commitment to excellence.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Story Section */}
+      <section className="home-section" ref={section1.ref}>
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className={`${section1.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h2 className="heading-md mb-6">Our Story</h2>
+              <div className="space-y-4 text-lg text-muted-foreground">
+                <p>
+                  Founded in 2009, LuxeRide began with a simple mission: to provide the most reliable, comfortable, and discreet chauffeur service for discerning travelers. What started as a small fleet serving a single city has grown into a trusted name in premium transportation across major metropolitan areas.
+                </p>
+                <p>
+                  We recognized that busy executives, VIP travelers, and corporate clients needed more than just a ride—they needed a seamless, stress-free experience. Every detail, from vehicle selection to driver training, was designed with that goal in mind.
+                </p>
+                <p>
+                  Today, LuxeRide serves thousands of clients annually, maintaining the same commitment to excellence that defined our first day in business. Our reputation is built on punctuality, professionalism, and the trust our clients place in us for their most important journeys.
+                </p>
+              </div>
+            </div>
+            <div className={`${section1.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
+              <img src={teamPhoto} alt="Professional chauffeur team" className="rounded-2xl shadow-premium" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="home-section bg-gradient-to-b from-muted/30 to-background">
+      <section className="home-section bg-gradient-to-b from-muted/30 to-background" ref={section2.ref}>
         <div className="container-custom">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className={`text-center ${section2.isVisible ? "animate-fade-up" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="text-5xl font-bold gradient-text mb-2">{stat.number}</div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </div>
@@ -78,9 +100,9 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="home-section">
+      <section className="home-section" ref={section3.ref}>
         <div className="container-custom">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 ${section3.isVisible ? "animate-fade-up" : "opacity-0"}`}>
             <h2 className="heading-lg mb-4">Our Core Values</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               The principles that guide every decision and every journey.
@@ -88,7 +110,7 @@ const About = () => {
           </div>
           <div className="card-grid-2col lg:grid-cols-4">
             {values.map((value, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className={`text-center ${section3.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="bg-gradient-to-br from-accent to-accent/80 p-4 rounded-xl w-fit mx-auto mb-4">
                   <value.icon className="h-8 w-8 text-accent-foreground" />
                 </div>
@@ -101,24 +123,27 @@ const About = () => {
       </section>
 
       {/* Quality Section */}
-      <section className="home-section bg-muted/30">
+      <section className="home-section bg-muted/30" ref={section4.ref}>
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="heading-md mb-12 text-center">Quality Guarantees</h2>
+            <div className={`text-center mb-12 ${section4.isVisible ? "animate-fade-up" : "opacity-0"}`}>
+              <h2 className="heading-md mb-4">Quality Guarantees</h2>
+              <p className="text-lg text-muted-foreground">Our commitment to your safety and comfort</p>
+            </div>
             <div className="space-y-6">
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "100ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Driver Excellence</h3>
                 <p className="text-muted-foreground">
                   Every chauffeur undergoes extensive background checks, professional training, and ongoing performance reviews. They possess deep local knowledge, defensive driving certifications, and customer service expertise.
                 </p>
               </div>
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "200ms" }}>
                 <h3 className="text-xl font-semibold mb-3">Fleet Maintenance</h3>
                 <p className="text-muted-foreground">
                   Our vehicles are inspected before every journey and serviced according to manufacturer schedules. We replace vehicles regularly to ensure you always ride in modern, immaculate transportation.
                 </p>
               </div>
-              <div className="card">
+              <div className={`card ${section4.isVisible ? "animate-scale-in" : "opacity-0"}`} style={{ animationDelay: "300ms" }}>
                 <h3 className="text-xl font-semibold mb-3">24/7 Operations</h3>
                 <p className="text-muted-foreground">
                   Our support team monitors every ride in real-time, ready to assist with any request or adjustment. Whether it's 3 AM or 3 PM, you have direct access to professional support.
